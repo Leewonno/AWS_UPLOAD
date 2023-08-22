@@ -8,7 +8,7 @@ const multerS3 = require("multer-s3"); //aws s3에 업로드하기 위한 multer
 
 // aws 설정
 aws.config.update({
-    accessKyeId:'AKIA3BCD7COSYA3ZBUXS',
+    accessKeyId:'AKIA3BCD7COSYA3ZBUXS',
     secretAccessKey:'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',
     region:"ap-northeast-2"
 })
@@ -67,6 +67,9 @@ const upload = multer({
         acl: 'public-read',
         metadata: function(req, file, callback){
             callback(null, {fieldName: file.filename});
+        },
+        key: function(req, file, callback){
+            callback(null, Date.now().toString() + "-" + file.originalname);
         }
         
     })
