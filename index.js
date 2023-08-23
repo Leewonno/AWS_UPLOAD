@@ -66,7 +66,7 @@ const upload = multer({
         // acl : 파일접근권한 (public-read로 해야 업로드된 파일이 공개)
         acl: 'public-read',
         metadata: function(req, file, callback){
-            callback(null, {fieldName: file.filename});
+            callback(null, {fieldName: file.fieldname});
         },
         key: function(req, file, callback){
             callback(null, Date.now().toString() + "-" + file.originalname);
